@@ -26,41 +26,9 @@
         class="button"
         onclick="
         // console.log('User has chosen Bat');
-        let randomNo = Math.random() * 3;
-         let computerChoice;
-        // This will generate random no between 0 to 3
-        if(randomNo>0 && randomNo<=1){
-             computerChoice = 'Bat';
-            //  console.log('Computer has chosen Bat');
-        }
-        else if(randomNo>1 && randomNo<=2){
-             computerChoice = 'Ball';
-            //  console.log('Computer has chosen Ball');
-        }
-        else{
-             computerChoice = 'Stump';
-            //  console.log('Computer has chosen Stump');
-        }
-        // console.log(`Computer has chosen $//{computerChoice}`);
-       
-        let result;
-        if(computerChoice==='Bat'){
-            result = `It's  a Tie`;
-            // console.log(`It's  a Tie`);
-        }
-        else if(computerChoice==='Ball'){
-             result = `User has Won`;
-            //  console.log(`User has Won`);
-        }
-        else{
-            result = `Computer has Won`;
-            //  console.log(`Computer has Won`);
-        }
-        //  console.log(` ${result}`);
-        
-        
-        alert(`User Choice Is Bat.\nComputer Choice Is ${computerChoice}\nResult ${result}`);
-        
+        let computerChoice = generateComputerChoice(); // Function Calling
+        let result = getResult('Bat',computerChoice);
+        showResult('Bat',computerChoice,result);
         "
       >
         Bat🏏
@@ -68,44 +36,12 @@
 
       <button
         class="button"
-        onclick="
-        
-        
-        
-        
-         let randomNo2 = Math.random() * 3;
-        let computerChoice2;
-        // This will generate random no between 0 to 3
-        if(randomNo>0 && randomNo<=1){
-             computerChoice = 'Bat';
-          
-        }
-        else if(randomNo>1 && randomNo<=2){
-             computerChoice = 'Ball';
-            
-        }
-        else{
-             computerChoice = 'Stump';
-            
-        }
-       
-        let result2;
-        if(computerChoice==='Ball'){
-            result = `It's  a Tie`;
-           
-        }
-        else if(computerChoice==='Stump'){
-             result = `User has Won`;
-    
-        }
-        else{
-            result = `Computer has Won`;
-            
-        }
-        
-        
-        alert(`User Choice Is Ball.\nComputer Choice Is ${computerChoice2}\nResult ${result2}`);
-        "
+        onclick="  
+       // console.log('User has chosen Ball');
+       computerChoice = generateComputerChoice() // Function Calling
+       result =   getResult('Ball',computerChoice);
+       showResult('Ball',computerChoice,result);
+       "
       >
         Ball 🔴
       </button>
@@ -113,56 +49,102 @@
       <button
         class="button"
         onclick="
-      
-      
-      
-      
-      
-      
-      
-      
-      
-         let randomNo3 = Math.random() * 3;
-        let computerChoice3;
-        // This will generate random no between 0 to 3
-        if(randomNo>0 && randomNo<=1){
-             computerChoice = 'Bat';
-          
-        }
-        else if(randomNo>1 && randomNo<=2){
-             computerChoice = 'Ball';
-            
-        }
-        else{
-             computerChoice = 'Stump';
-            
-        }
-       
-        let result3;
-        if(computerChoice==='Stump'){
-            result = `It's  a Tie`;
-           
-        }
-        else if(computerChoice==='Bat'){
-             result = `User has Won`;
-    
-        }
-        else{
-            result = `Computer has Won`;
-            
-        }
-        
-        
-        alert(`User Choice Is Stump.\nComputer Choice Is ${computerChoice3}\nResult ${result3}`);
-      
-      
-    
+      // console.log('User has chosen Stump');
+       computerChoice = generateComputerChoice() // Function Calling
+       result =   getResult('Stump',computerChoice);
+       showResult('Stump',computerChoice,result);
       "
       >
         Stump \|/
       </button>
     </div>
 
-    <script></script>
+    <script>
+
+      // Object
+      let score = {
+        win: 0,
+        loss: 0,
+        tie: 0,
+        displayScore(){
+          return `Win => ${score.win}\nLoss => ${score.loss}\ntie => ${score.tie}`;
+        }
+      };
+
+      function generateComputerChoice(){
+         let randomNo = Math.random() * 3;
+        // This will generate random no between 0 to 3
+        if(randomNo>0 && randomNo<=1){
+           return  'Bat';
+            // Computer has chosen Bat
+        }
+        else if(randomNo>1 && randomNo<=2){
+             return  'Ball';
+            // Computer has chosen Ball
+        }
+        else{
+             return 'Stump';
+            //Computer has chosen Stump
+        }
+      }
+
+      function getResult(userMove, computerMove){
+        if(userMove==='Bat'){
+            if(computerMove==='Bat'){
+              score.tie++;
+            return `It's  a Tie`;
+        }
+        else if(computerMove==='Ball'){
+            score.win++;
+            return `User has Won`;
+        }
+        else{
+          score.loss++;
+           return `Computer has Won`;
+        }
+          }
+        
+          
+        else if(userMove==='Ball'){
+             if(computerMove==='Ball'){
+               score.tie++;
+            return `It's  a Tie`;
+           
+        }
+        else if(computerMove==='Stump'){
+             score.win++;
+             return `User has Won`;
+    
+        }
+        else{
+             score.loss++;
+             return `Computer has Won`;
+            
+        }
+          }
+        
+        
+        else{
+            if(computerMove==='Stump'){
+               score.tie++;
+            return `It's  a Tie`;
+           
+        }
+        else if(computerMove==='Bat'){
+           score.win++;
+             return `User has Won`;
+    
+        }
+        else{
+           score.loss++;
+           return `Computer has Won`;
+            
+        }
+          }
+      }
+      function showResult(userMove,computerChoice,result){
+      alert(`User Choice Is ${userMove}\nComputer Choice Is ${computerChoice}\nResult ${result}\nYour Score Is\n ${score.displayScore()}`);
+      }
+    </script>
   </body>
 </html>
